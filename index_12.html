@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RUNG — climb the ladder</title>
+<meta name="description" content="A strength training plan for 13-16 year olds. Three days a week, seven exercises, each with a ladder you climb as you get stronger.">
+<meta name="theme-color" content="#06060C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:title" content="RUNG">
+<meta property="og:description" content="Start where you are. Move up.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306060C'/%3E%3Crect x='7' y='7' width='18' height='3' fill='%2300E9FF'/%3E%3Crect x='7' y='14' width='18' height='3' fill='%2300E9FF' opacity='.55'/%3E%3Crect x='7' y='21' width='18' height='3' fill='%23FF2D95'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#06060C;
+  --panel:#0F1020;
+  --panel-2:#16182C;
+  --line:#262A45;
+  --cyan:#00E9FF;
+  --magenta:#FF2D95;
+  --amber:#FFC24B;
+  --text:#E8ECF7;
+  --dim:#7E87A6;
+  --r:6px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(900px 500px at 15% -10%, rgba(0,233,255,.10), transparent 60%),
+    radial-gradient(800px 500px at 95% 5%, rgba(255,45,149,.10), transparent 60%),
+    var(--void);
+  color:var(--text);
+  font-family:"Space Grotesk",system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 90px}
+
+header{padding:40px 0 22px}
+.mark{
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--cyan);
+}
+h1{
+  font-family:"Chakra Petch",sans-serif;font-weight:700;
+  font-size:clamp(40px,10vw,76px);line-height:.92;letter-spacing:-.02em;
+  margin:12px 0 0;text-transform:uppercase;
+  text-shadow:0 0 26px rgba(0,233,255,.28);
+}
+h1 em{font-style:normal;color:var(--magenta);text-shadow:0 0 30px rgba(255,45,149,.45)}
+.sub{margin:16px 0 0;max-width:48ch;color:var(--dim);font-size:15px}
+
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:26px 0 4px}
+.stat{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:13px 15px;position:relative;overflow:hidden;
+}
+.stat::after{
+  content:"";position:absolute;left:0;top:0;height:2px;width:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--magenta));opacity:.8;
+}
+.stat b{
+  display:block;font-family:"JetBrains Mono",monospace;font-size:27px;
+  line-height:1;font-weight:700;color:var(--cyan);
+}
+.stat span{
+  display:block;margin-top:6px;font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);
+}
+
+nav{display:flex;flex-wrap:wrap;gap:7px;margin:26px 0 28px}
+.tab{
+  font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:9px 13px;cursor:pointer;color:var(--dim);
+}
+.tab:hover{color:var(--text);border-color:var(--cyan)}
+.tab[aria-selected="true"]{
+  color:var(--void);background:var(--cyan);border-color:var(--cyan);
+  box-shadow:0 0 22px rgba(0,233,255,.4);
+}
+.tab:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+
+section[hidden]{display:none}
+h2{
+  font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(23px,5vw,34px);line-height:1;margin:0 0 8px;
+}
+h2 small{
+  display:block;font-family:"JetBrains Mono",monospace;font-size:11px;
+  font-weight:500;letter-spacing:.18em;color:var(--magenta);margin-bottom:9px;
+}
+.lede{color:var(--dim);margin:0 0 20px;max-width:62ch;font-size:15px}
+.dose{
+  font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;
+  color:var(--void);background:var(--amber);display:inline-block;
+  padding:5px 10px;border-radius:var(--r);margin-bottom:18px;letter-spacing:.04em;
+}
+
+.lift{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:16px;overflow:hidden;
+}
+.lift-head{
+  display:flex;align-items:baseline;gap:11px;padding:15px 17px 0;flex-wrap:wrap;
+}
+.lift-head .n{
+  font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;
+  color:var(--magenta);
+}
+.lift-head h3{
+  font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:23px;margin:0;line-height:1;letter-spacing:.01em;
+}
+.lift-head .what{
+  margin-left:auto;font-family:"JetBrains Mono",monospace;
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);
+}
+.reps{
+  font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--cyan);
+  padding:6px 17px 0;letter-spacing:.06em;
+}
+.lift-body{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:13px 17px 17px}
+@media(max-width:640px){.lift-body{grid-template-columns:1fr}}
+
+.ladder{list-style:none;margin:0;padding:0}
+.rung{
+  display:flex;align-items:center;gap:10px;padding:7px 10px;
+  border:1px solid var(--line);border-radius:var(--r);margin-bottom:5px;
+  font-size:13.5px;background:var(--panel-2);color:var(--dim);
+}
+.rung .lv{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;min-width:16px}
+.rung.done{border-color:rgba(0,233,255,.3);color:rgba(232,236,247,.4)}
+.rung.done .lv{color:var(--cyan)}
+.rung.now{
+  border-color:var(--cyan);color:var(--void);
+  background:linear-gradient(90deg,var(--cyan),#59F3FF);
+  box-shadow:0 0 24px rgba(0,233,255,.35);font-weight:500;
+}
+.rung.now .lv{color:var(--void)}
+.cues{margin:0;padding-left:16px;font-size:13.5px;color:#C3CBE0}
+.cues li{margin-bottom:6px}
+.cues li::marker{color:var(--magenta)}
+.ctrl{display:flex;gap:7px;margin-top:11px}
+button.mini{
+  font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;padding:8px 11px;cursor:pointer;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--panel-2);color:var(--text);
+}
+button.mini:hover:not(:disabled){border-color:var(--magenta);color:var(--magenta)}
+button.mini:disabled{opacity:.28;cursor:not-allowed}
+button.mini:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+.done-bar{
+  background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--magenta);
+  border-radius:var(--r);padding:17px;display:flex;align-items:center;gap:15px;
+  flex-wrap:wrap;margin:24px 0;
+}
+.done-bar p{margin:0;font-size:13.5px;flex:1;min-width:190px;color:var(--dim)}
+button.big{
+  font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:16px;letter-spacing:.04em;
+  background:var(--magenta);color:#fff;border:none;border-radius:var(--r);
+  padding:12px 22px;cursor:pointer;box-shadow:0 0 26px rgba(255,45,149,.4);
+}
+button.big:hover{background:#FF56AB}
+button.big:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:0 0 22px}
+.day{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:11px 6px;text-align:center;
+}
+.day b{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--dim)}
+.day span{display:block;font-size:9.5px;margin-top:6px;line-height:1.35;color:var(--dim)}
+.day.train b{color:var(--cyan)}
+.day.train span{color:var(--text)}
+@media(max-width:640px){.week{grid-template-columns:repeat(4,1fr)}}
+
+.block{
+  background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--cyan);
+  padding:14px 16px;border-radius:var(--r);margin-bottom:13px;
+}
+.block h4{margin:0 0 6px;font-size:14.5px;font-weight:700;color:var(--text)}
+.block p,.block ul{margin:0;font-size:13.5px;color:#B6BFD6}
+.block ul{padding-left:17px}
+.block li{margin-bottom:5px}
+.block li::marker{color:var(--cyan)}
+.warn{border-left-color:var(--amber)}
+.warn li::marker{color:var(--amber)}
+.stop{border-left-color:var(--magenta)}
+.stop li::marker{color:var(--magenta)}
+
+table.plate{width:100%;border-collapse:collapse;margin-bottom:18px;font-size:13.5px}
+table.plate th,table.plate td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top;color:#B6BFD6}
+table.plate th{
+  background:var(--panel-2);color:var(--cyan);font-family:"JetBrains Mono",monospace;
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+}
+table.plate td b{color:var(--text)}
+
+.coach{
+  border:1px dashed var(--magenta);border-radius:var(--r);
+  padding:15px 17px;margin:0 0 22px;background:rgba(255,45,149,.05);
+}
+.coach h4{
+  margin:0 0 4px;font-family:"JetBrains Mono",monospace;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--magenta);
+}
+.coach p{margin:0 0 12px;font-size:13px;color:var(--dim)}
+.coach .rows{font-family:"JetBrains Mono",monospace;font-size:12px}
+.coach .rows div{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:7px 0;border-top:1px solid var(--line);color:var(--dim);
+}
+.coach .rows div b{color:var(--cyan);font-weight:700}
+.coach .acts{display:flex;gap:7px;margin-top:13px;flex-wrap:wrap}
+.coach .acts button{
+  font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;background:transparent;
+  border:1px solid var(--line);color:var(--dim);border-radius:var(--r);
+  padding:9px 12px;cursor:pointer;
+}
+.coach .acts button:hover{border-color:var(--magenta);color:var(--magenta)}
+
+.who{
+  display:flex;align-items:center;gap:9px;margin-top:14px;flex-wrap:wrap;
+}
+.who input{
+  background:var(--panel);border:1px solid var(--line);color:var(--text);
+  border-radius:var(--r);padding:8px 11px;font-family:"Space Grotesk",sans-serif;
+  font-size:14px;max-width:200px;
+}
+.who input:focus{outline:none;border-color:var(--cyan)}
+.who button{
+  font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;background:transparent;
+  border:1px solid var(--line);color:var(--dim);border-radius:var(--r);
+  padding:9px 12px;cursor:pointer;
+}
+.who button:hover{border-color:var(--cyan);color:var(--cyan)}
+.who .greet{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--dim)}
+.who .greet b{color:var(--cyan);font-weight:700}
+
+.record{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0 0}
+@media(min-width:640px){.record{grid-template-columns:repeat(4,1fr)}}
+.record div{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:11px 12px}
+.record b{display:block;font-family:"JetBrains Mono",monospace;font-size:19px;color:var(--cyan);line-height:1}
+.record span{display:block;margin-top:5px;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+
+.warmup{
+  background:var(--panel-2);border:1px dashed var(--line);border-radius:var(--r);
+  padding:12px 15px;margin-bottom:18px;
+}
+.warmup h4{
+  margin:0 0 7px;font-family:"JetBrains Mono",monospace;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--amber);
+}
+.warmup ol{margin:0;padding-left:17px;font-size:13.5px;color:#B6BFD6}
+.warmup li{margin-bottom:4px}
+.warmup li::marker{color:var(--amber);font-family:"JetBrains Mono",monospace;font-size:11px}
+
+.auth{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;
+  font-family:"JetBrains Mono",monospace;font-size:11px;
+}
+.auth button{
+  font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;background:transparent;
+  border:1px solid var(--line);color:var(--dim);border-radius:var(--r);
+  padding:8px 12px;cursor:pointer;
+}
+.auth button:hover{border-color:var(--cyan);color:var(--cyan)}
+.auth .who-is{color:var(--dim)}
+.auth .who-is b{color:var(--cyan)}
+.auth .sync{color:var(--dim);opacity:.7}
+
+#authbox{
+  position:fixed;inset:0;z-index:300;background:rgba(6,6,12,.94);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  backdrop-filter:blur(4px);
+}
+#authbox[hidden]{display:none}
+.auth-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:22px;width:100%;max-width:360px;
+}
+.auth-card h3{
+  font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:23px;margin:0 0 5px;
+}
+.auth-card p{font-size:12.5px;color:var(--dim);margin:0 0 16px;line-height:1.5}
+.auth-card input{
+  width:100%;background:var(--panel-2);border:1px solid var(--line);color:var(--text);
+  border-radius:var(--r);padding:11px 12px;margin-bottom:9px;font-size:14px;
+  font-family:"Space Grotesk",sans-serif;
+}
+.auth-card input:focus{outline:none;border-color:var(--cyan)}
+.auth-card .go{
+  width:100%;background:var(--cyan);color:var(--void);border:none;border-radius:var(--r);
+  padding:13px;font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:16px;
+  text-transform:uppercase;cursor:pointer;margin-top:4px;
+}
+.auth-card .alt{
+  width:100%;background:transparent;border:none;color:var(--dim);
+  font-family:"JetBrains Mono",monospace;font-size:11px;margin-top:12px;cursor:pointer;
+  text-decoration:underline;
+}
+.auth-msg{font-size:12px;color:var(--magenta);margin:10px 0 0;min-height:16px}
+.auth-card .tiny{font-size:10.5px;color:var(--dim);margin-top:14px;line-height:1.5;opacity:.8}
+
+#adminPanel{
+  border:1px dashed var(--cyan);border-radius:var(--r);padding:15px 17px;
+  margin:0 0 22px;background:rgba(0,233,255,.05);
+}
+#adminPanel h4{
+  margin:0 0 10px;font-family:"JetBrains Mono",monospace;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);
+}
+#adminPanel .rows{font-family:"JetBrains Mono",monospace;font-size:12px}
+#adminPanel .rows div{
+  display:flex;justify-content:space-between;gap:12px;padding:7px 0;
+  border-top:1px solid var(--line);color:var(--dim);
+}
+#adminPanel .rows div b{color:var(--cyan)}
+
+.amrap-open{
+  font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:15px;letter-spacing:.04em;background:var(--cyan);color:var(--void);
+  border:none;border-radius:var(--r);padding:12px 20px;cursor:pointer;margin-top:4px;
+}
+.amrap-open:hover{background:#59F3FF}
+
+#amrap{
+  position:fixed;inset:0;z-index:200;background:var(--void);
+  display:flex;flex-direction:column;padding:20px 18px;overflow-y:auto;
+}
+#amrap[hidden]{display:none}
+.am-close{
+  position:absolute;top:14px;right:16px;background:transparent;border:1px solid var(--line);
+  color:var(--dim);border-radius:20px;padding:8px 13px;cursor:pointer;
+  font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+}
+.am-setup{max-width:420px;margin:auto;width:100%}
+.am-setup h3{
+  font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:27px;margin:0 0 6px;
+}
+.am-setup p{color:var(--dim);font-size:13.5px;margin:0 0 18px}
+.am-label{
+  font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--magenta);margin:16px 0 8px;
+}
+.am-pick{display:flex;flex-wrap:wrap;gap:6px}
+.am-pick button{
+  font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;
+  background:var(--panel);border:1px solid var(--line);color:var(--dim);
+  border-radius:20px;padding:9px 13px;cursor:pointer;
+}
+.am-pick button.on{background:var(--cyan);border-color:var(--cyan);color:var(--void)}
+.am-go{
+  width:100%;margin-top:24px;font-family:"Chakra Petch",sans-serif;font-weight:700;
+  text-transform:uppercase;font-size:19px;background:var(--magenta);color:#fff;
+  border:none;border-radius:var(--r);padding:16px;cursor:pointer;
+  box-shadow:0 0 30px rgba(255,45,149,.35);
+}
+.am-live{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none}
+.am-count{
+  font-family:"JetBrains Mono",monospace;font-weight:700;font-size:clamp(90px,32vw,190px);
+  line-height:.9;color:var(--cyan);text-shadow:0 0 50px rgba(0,233,255,.35);
+}
+.am-clock{
+  font-family:"JetBrains Mono",monospace;font-size:clamp(30px,9vw,48px);
+  font-weight:700;color:var(--text);margin-top:10px;
+}
+.am-clock.low{color:var(--magenta)}
+.am-hint{
+  font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim);
+  margin-top:22px;letter-spacing:.1em;text-transform:uppercase;
+}
+.am-bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden;width:100%;max-width:420px;margin-top:18px}
+.am-bar i{display:block;height:100%;background:var(--cyan);width:100%}
+.am-ready{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:clamp(70px,25vw,150px);color:var(--magenta)}
+.am-note{
+  background:var(--panel);border-left:3px solid var(--amber);border-radius:var(--r);
+  padding:12px 14px;margin-top:20px;font-size:12.5px;color:#B6BFD6;
+}
+
+.game{
+  position:fixed;right:14px;bottom:70px;z-index:49;width:min(280px,calc(100vw - 28px));
+  background:rgba(15,16,32,.97);border:1px solid var(--line);border-radius:12px;
+  padding:13px 14px;backdrop-filter:blur(8px);box-shadow:0 6px 34px rgba(0,0,0,.7);
+}
+.game-tabs{display:flex;gap:5px;margin-bottom:11px}
+.game-tabs button{
+  flex:1;font-family:"JetBrains Mono",monospace;font-size:9px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;background:transparent;
+  border:1px solid var(--line);color:var(--dim);border-radius:20px;padding:7px 4px;cursor:pointer;
+}
+.game-tabs button.on{background:var(--cyan);border-color:var(--cyan);color:var(--void)}
+#react-pad{
+  height:96px;border-radius:var(--r);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--dim);
+  cursor:pointer;padding:8px;line-height:1.4;user-select:none;
+}
+#react-pad.go{background:var(--cyan);color:var(--void);border-color:var(--cyan);font-size:20px;font-weight:700}
+#react-pad.wait{background:var(--panel-2)}
+.react-best{
+  font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--dim);
+  text-align:center;margin-top:8px;letter-spacing:.08em;
+}
+.quiz-q{font-size:13.5px;color:var(--text);margin:0 0 10px;line-height:1.4}
+.quiz-opts button{
+  display:block;width:100%;text-align:left;background:var(--panel-2);
+  border:1px solid var(--line);color:#C3CBE0;border-radius:var(--r);
+  padding:9px 11px;margin-bottom:6px;cursor:pointer;font-size:12.5px;
+  font-family:"Space Grotesk",sans-serif;
+}
+.quiz-opts button:hover{border-color:var(--cyan)}
+.quiz-opts button.right{border-color:var(--cyan);color:var(--cyan)}
+.quiz-opts button.wrong{border-color:var(--magenta);color:var(--magenta)}
+.quiz-fb{font-size:12px;color:var(--dim);margin:8px 0 0;line-height:1.45}
+
+.timer{
+  position:fixed;right:14px;bottom:14px;z-index:50;
+  background:rgba(15,16,32,.94);border:1px solid var(--line);border-radius:40px;
+  padding:7px 9px;display:flex;align-items:center;gap:6px;
+  backdrop-filter:blur(8px);box-shadow:0 6px 30px rgba(0,0,0,.6);
+}
+.timer button{
+  font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;
+  background:transparent;border:1px solid var(--line);color:var(--dim);
+  border-radius:20px;padding:7px 10px;cursor:pointer;min-width:40px;
+}
+.timer button:hover{border-color:var(--cyan);color:var(--cyan)}
+.timer button:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+#tdisp{
+  font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:700;
+  color:var(--dim);min-width:52px;text-align:center;padding:0 4px;cursor:pointer;
+}
+#tdisp.live{color:var(--cyan)}
+#tdisp.done{color:var(--magenta)}
+
+.bench-form{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:8px;margin:12px 0 4px}
+@media(max-width:640px){.bench-form{grid-template-columns:1fr 1fr}}
+.bench-form label{
+  display:block;font-family:"JetBrains Mono",monospace;font-size:9px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:5px;
+}
+.bench-form input{
+  width:100%;background:var(--panel-2);border:1px solid var(--line);color:var(--text);
+  border-radius:var(--r);padding:9px 10px;font-family:"JetBrains Mono",monospace;font-size:14px;
+}
+.bench-form input:focus{outline:none;border-color:var(--cyan)}
+.bench-form button{
+  align-self:end;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;background:var(--cyan);color:var(--void);
+  border:none;border-radius:var(--r);padding:11px 14px;cursor:pointer;
+}
+.bench-log{list-style:none;margin:14px 0 0;padding:0;font-family:"JetBrains Mono",monospace;font-size:12px}
+.bench-log li{
+  display:flex;gap:10px;flex-wrap:wrap;padding:9px 0;border-top:1px solid var(--line);color:var(--dim);
+}
+.bench-log li .dt{color:var(--text);min-width:76px}
+.bench-log li .up{color:var(--cyan)}
+.bench-empty{font-size:13px;color:var(--dim);margin:12px 0 0}
+
+figure.own{
+  margin:0 0 13px;background:var(--panel);border:1px solid var(--line);
+  border-left:3px solid var(--magenta);border-radius:var(--r);
+  padding:14px 16px;
+}
+figure.own img{
+  display:block;width:100%;max-width:340px;height:auto;border-radius:var(--r);
+  border:1px solid var(--line);margin-bottom:12px;
+}
+figure.own figcaption{font-size:13.5px;color:#B6BFD6}
+figure.own figcaption b{display:block;color:var(--text);font-size:14.5px;margin-bottom:6px}
+figure.own .facts{
+  list-style:none;margin:11px 0 0;padding:11px 0 0;border-top:1px solid var(--line);
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--dim);
+}
+figure.own .facts li{margin-bottom:5px}
+figure.own .facts b{
+  display:inline;color:var(--cyan);font-family:"JetBrains Mono",monospace;
+  font-size:11.5px;margin:0;
+}
+footer{
+  margin-top:46px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);font-family:"JetBrains Mono",monospace;line-height:1.7;
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="mark">Strength training · ages 13–16</div>
+  <h1>Start where<br>you are.<br><em>Move up.</em></h1>
+  <div class="auth" id="authrow">
+    <span class="who-is" id="authwho">Not signed in — progress saves on this device only</span>
+    <button id="authbtn">Sign in</button>
+    <button id="authout" hidden>Sign out</button>
+    <span class="sync" id="authsync"></span>
+  </div>
+
+  <div class="who">
+    <span class="greet" id="greet" hidden></span>
+    <input id="nameIn" type="text" maxlength="20" placeholder="Your name" aria-label="Your name">
+    <button id="nameSet">Save</button>
+    <button id="nameEdit" hidden>Change</button>
+  </div>
+  <p class="sub">Upper, core, legs. Every exercise has a ladder — you start at the rung you can actually do properly, and you move up when you've earned it. That's the whole system.</p>
+</header>
+
+<div class="strip">
+  <div class="stat"><b id="s-sessions">0</b><span>Sessions logged</span></div>
+  <div class="stat"><b id="s-week">1</b><span>Week</span></div>
+  <div class="stat"><b id="s-rungs">7</b><span>Rungs climbed</span></div>
+</div>
+
+<nav role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-panel="upper">Upper</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="core">Core</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="legs">Legs</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="rules">Rules</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="week">Week</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="food">Food</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="real">Straight talk</button>
+</nav>
+
+<!-- ================ UPPER ================ -->
+<section id="upper">
+  <h2><small>Day 01 / Monday</small>Upper body</h2>
+  <p class="lede">Work down the list. Rest properly between sets — the timer in the corner is there for a reason.</p>
+  <div class="warmup">
+    <h4>Warm up first · 3 minutes</h4>
+    <ol>
+      <li>Arm circles, forwards then backwards, until your shoulders feel loose</li>
+      <li>10 press-ups against a wall — slow, full range</li>
+      <li>A 15 second dead hang from the bar</li>
+      <li>One light set of your first exercise, well short of failure</li>
+    </ol>
+  </div>
+  <div class="dose">3 sets each · the last clean rep is the last rep · 90s rest</div>
+  <div class="block stop">
+    <h4>Read this before you bench anything</h4>
+    <ul>
+      <li><b>Never bench a barbell on your own.</b> Not once. A bar you can't press comes down on your throat and you can't get it off. Spotter, or a rack with safety bars set, or dumbbells.</li>
+      <li>Rungs 1–4 need no barbell at all. There is no rush to get to rung 5.</li>
+      <li>Get an adult who lifts, or a coach at a gym, to watch your first barbell sessions. Not a video.</li>
+      <li>No maxing out. No "one rep to see what I can do". That's how teenagers get hurt on this lift.</li>
+    </ul>
+  </div>
+  <div id="lifts-upper"></div>
+  <div class="done-bar">
+    <p>All three done? Log it. Weeks in a row beats anything you did in a single session.</p>
+    <button class="big" data-log="upper">Log upper day</button>
+    <button class="mini" data-undo="upper">Undo</button>
+  </div>
+</section>
+
+<!-- ================ CORE ================ -->
+<section id="core" hidden>
+  <h2><small>Day 02 / Wednesday</small>Core</h2>
+  <p class="lede">Short session — 15 minutes. Leg raises hit the lower half, crunches the upper. Slow and controlled beats fast and many, every time.</p>
+  <div class="warmup">
+    <h4>Warm up first · 2 minutes</h4>
+    <ol>
+      <li>30 seconds of cat-cow — arch and round your back on all fours</li>
+      <li>20 dead bugs, slow, opposite arm and leg</li>
+      <li>A 20 second plank to wake everything up</li>
+    </ol>
+  </div>
+  <div class="dose">3 sets each · go until you can't · 60s rest</div>
+  <div id="lifts-core"></div>
+  <div class="block warn">
+    <h4>Crunches will not give you a six-pack</h4>
+    <p>They build the muscle underneath. Whether you can see it comes down to how much fat sits on top, which crunches don't touch — you can't choose where your body loses fat. For most 13–16 year olds, visible abs are mainly a question of how far through puberty you are and what you were born with. Train them because a strong core makes everything else better, not as a mirror project.</p>
+  </div>
+  <div class="done-bar">
+    <p>Core recovers fast — if you want to add this to your Monday or Friday instead, that's fine.</p>
+    <button class="big" data-log="core">Log core day</button>
+    <button class="mini" data-undo="core">Undo</button>
+  </div>
+</section>
+
+<!-- ================ LEGS ================ -->
+<section id="legs" hidden>
+  <h2><small>Day 03 / Friday</small>Legs</h2>
+  <p class="lede">Two exercises, both single-leg. Harder than they look and unforgiving on balance for the first fortnight — that's normal, and the balance itself is part of what you're training.</p>
+  <div class="warmup">
+    <h4>Warm up first · 3 minutes</h4>
+    <ol>
+      <li>20 bodyweight squats, no weight, full depth</li>
+      <li>10 slow leg swings each leg, forwards and sideways</li>
+      <li>20 two-leg calf raises</li>
+      <li>One light set of split squats holding a wall</li>
+    </ol>
+  </div>
+  <div class="dose">3 sets per leg · go until form goes · 90s rest</div>
+  <div id="lifts-legs"></div>
+  <div class="block">
+    <h4>Do the weaker leg first</h4>
+    <p>Start every set with whichever leg is weaker, and make the stronger leg match its reps — don't give it extra. Most people have a noticeable gap for the first couple of months, and this is how you close it rather than widen it.</p>
+  </div>
+  <div class="done-bar">
+    <p>Legs done. Expect to feel this on Sunday rather than Saturday.</p>
+    <button class="big" data-log="legs">Log leg day</button>
+    <button class="mini" data-undo="legs">Undo</button>
+  </div>
+</section>
+
+<!-- ================ RULES ================ -->
+<section id="rules" hidden>
+  <h2><small>The bits that decide whether this works</small>Rules</h2>
+  <p class="lede">You can get every exercise right and still get nowhere if you get these wrong. In order of how much they matter.</p>
+
+  <div class="block">
+    <h4>01 · Effort — every set ends at the last clean rep</h4>
+    <p>Don't count to a target and stop. Keep going until you can't complete another rep with good form — then the set is over. On most of the exercises here that means going to failure, every set. There are no rep numbers in this app on purpose: a number turns into a ceiling, and you'll stop at it long before you've actually worked.</p>
+  </div>
+
+  <div class="block warn">
+    <h4>02 · It only counts as failure if the reps were clean</h4>
+    <p>The set ends when your <em>form</em> gives out, not when your willpower does. Reps that turn into flailing, jerking, or holding your breath aren't bonus reps — they're a different and worse exercise, and they're where injuries come from. The last rep should look like the ones before it.</p>
+    <p style="margin-top:8px"><b>Safe to take all the way, every set:</b> press-ups, crunches, leg raises, lateral raises, calf raises. Failing on these just means you stop moving.</p>
+  </div>
+
+  <div class="block stop">
+    <h4>03 · The ones you never take to failure</h4>
+    <ul>
+      <li><b>Barbell bench press.</b> Failing means a loaded bar sitting on your chest or throat that you can't lift off — and you can't shout for help with a bar on your windpipe. End every bench set knowing you had one more in you. If you want to find your limit, you do it with someone standing over you, never alone.</li>
+      <li><b>Pull-ups</b>, once you're tired enough to be dropping off the bar rather than lowering off it.</li>
+      <li><b>Bulgarian split squats</b>, once your balance goes — you'll fall sideways holding weight.</li>
+      <li>Anything with weight over your chest or head while you're alone in the house.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h4>04 · Training this hard has a price</h4>
+    <p>Taking every set to failure costs more recovery than stopping short. That's a real trade-off: if Monday leaves you flattened for Wednesday and Friday, you've done less total work across the week — and the week's total is what builds you. Sessions getting worse instead of better is the signal to back off, not to push harder.</p>
+  </div>
+
+  <div class="block">
+    <h4>05 · Progressive overload — the one you can't skip</h4>
+    <p>Something has to get harder over time or your body has no reason to change. The ladder <em>is</em> this: more reps at your current rung, then the next rung. If nothing has got harder in the last month, nothing will happen in the next one.</p>
+  </div>
+
+  <div class="block">
+    <h4>06 · Tempo — two seconds down</h4>
+    <p>Lower under control on every rep. The lowering half of a lift builds at least as much as the lifting half, and it's the half everybody throws away. Most people don't need more weight, they need to stop dropping it.</p>
+  </div>
+
+  <div class="block">
+    <h4>07 · Full range every rep</h4>
+    <p>Full stretch at the bottom, full squeeze at the top. Half reps build half a muscle and let you lie to yourself about which rung you're on. A full-range rung 3 beats a bouncy rung 5.</p>
+  </div>
+
+  <div class="block">
+    <h4>08 · Rest properly between sets</h4>
+    <ul>
+      <li><b>Bench, pull-ups, split squats:</b> 90–120 seconds</li>
+      <li><b>Lateral raises, abs, calves:</b> 45–60 seconds</li>
+    </ul>
+    <p style="margin-top:7px">Resting isn't slacking. Rest short and you do fewer reps, which means less work done, which means less muscle. Sit down and wait.</p>
+  </div>
+
+  <div class="block">
+    <h4>09 · Write it down</h4>
+    <p>Reps and rung, every session, in your notes app. Memory is generous and will tell you last week was better than it was. The log is the only thing that tells you whether you've earned the next rung.</p>
+  </div>
+
+  <div class="block warn">
+    <h4>10 · Back off every fourth week</h4>
+    <p>Do the same sessions but end every set well before failure, while it still feels comfortable. You'll feel like you're wasting a week — you're not, you're letting your joints and nervous system catch up, and you'll usually come back stronger. If you're ill or in exam week, miss sessions and don't try to make them up by doubling.</p>
+  </div>
+
+  <div class="block">
+    <h4>11 · Consistency beats intensity</h4>
+    <p>Three ordinary sessions a week for six months beats one heroic session followed by a fortnight off, every time. Nobody who trains hard for three weeks and quits looks any different at the end of it.</p>
+  </div>
+</section>
+
+<!-- ================ WEEK ================ -->
+<section id="week" hidden>
+  <h2><small>The schedule</small>Your week</h2>
+  <p class="lede">Three sessions, never back-to-back. Rest days are when the building actually happens — the session is only the signal.</p>
+  <div id="adminPanel" hidden>
+    <h4>Admin — all users</h4>
+    <div class="rows" id="admin-rows"></div>
+  </div>
+
+  <div class="coach" id="coach" hidden>
+    <h4>Coach view</h4>
+    <p>Hidden panel — only shows when the link ends in #coach. Not a lock: anyone reading the page source can find it. Don't put anything private in here.</p>
+    <div class="rows" id="coach-rows"></div>
+    <div class="acts">
+      <button id="c-export">Copy my data</button>
+      <button id="c-reset">Reset everything</button>
+    </div>
+  </div>
+
+  <div class="week" id="weekgrid"></div>
+
+  <div class="block">
+    <h4>Your record</h4>
+    <div class="record">
+      <div><b id="r-total">0</b><span>Total sessions</span></div>
+      <div><b id="r-upper">0</b><span>Upper days</span></div>
+      <div><b id="r-core">0</b><span>Core days</span></div>
+      <div><b id="r-legs">0</b><span>Leg days</span></div>
+    </div>
+    <p style="margin-top:11px" id="r-last">No sessions logged yet.</p>
+  </div>
+
+  <div class="block">
+    <h4>Moving up a rung</h4>
+    <p>When you get clearly more reps than the week before — no wobbling, no breath-holding — in two sessions running, move up one rung. Expect your reps to crash back down. That drop is the whole point of the ladder.</p>
+  </div>
+  <div class="block warn">
+    <h4>Dropping back a rung</h4>
+    <p>If your form falls apart after only a handful of reps, or something hurts in a joint rather than burning in a muscle, drop back. A rung you own builds more than a rung you survive.</p>
+  </div>
+  <div class="block">
+    <h4>Every four weeks: test yourself</h4>
+    <p>Three numbers, same three every time, done fresh rather than at the end of a session. This is your progress record — real, measurable, and it doesn't depend on how the light hit the mirror that morning.</p>
+    <div class="bench-form">
+      <div>
+        <label for="b1">Max press-ups</label>
+        <input id="b1" type="number" inputmode="numeric" min="0" max="999" placeholder="0">
+      </div>
+      <div>
+        <label for="b2">Dead hang (secs)</label>
+        <input id="b2" type="number" inputmode="numeric" min="0" max="999" placeholder="0">
+      </div>
+      <div>
+        <label for="b3">Squats in 60s</label>
+        <input id="b3" type="number" inputmode="numeric" min="0" max="999" placeholder="0">
+      </div>
+      <button id="b-save">Save test</button>
+    </div>
+    <button class="amrap-open" id="am-open">Run a timed test</button>
+    <ul class="bench-log" id="b-log"></ul>
+    <p class="bench-empty" id="b-empty">No tests saved yet. Do the first one before you start training — you'll want the starting numbers later.</p>
+  </div>
+  <div class="block warn">
+    <h4>Sleep</h4>
+    <p>Teenagers are generally advised to get around 8–10 hours — worth checking current NHS guidance for your exact age rather than trusting a number in an app. Either way it does more for your results than any change you could make to this programme. Extra hour of sleep beats extra session.</p>
+  </div>
+</section>
+
+<!-- ================ FOOD ================ -->
+<section id="food" hidden>
+  <h2><small>No maths</small>Food</h2>
+  <p class="lede">No calorie counting here, deliberately. At your age the far more common problem is eating too little to grow on — training hard, running on toast and air, wondering why nothing changes. Build meals to a shape instead of a number.</p>
+
+  <table class="plate">
+    <tr><th>Every meal gets…</th><th>Which looks like</th></tr>
+    <tr><td><b>Something with protein</b></td><td>Eggs, milk, yoghurt, chicken, mince, fish, tuna, beans, lentils, chickpeas, tofu, cheese, peanut butter</td></tr>
+    <tr><td><b>Something starchy</b></td><td>Rice, pasta, potatoes, bread, oats, cereal, wraps. Fuel, not the enemy — cutting it is why people feel flat in sessions</td></tr>
+    <tr><td><b>Something that grew</b></td><td>Any fruit or veg. Frozen counts. Tinned counts. Beans on toast is a decent meal</td></tr>
+  </table>
+
+  <div class="block">
+    <h4>A normal training day</h4>
+    <ul>
+      <li><b>Breakfast:</b> porridge and a banana, or eggs on toast. Not skipped, especially on training days</li>
+      <li><b>Lunch:</b> a proper sandwich or wrap with meat, cheese, egg or beans in it, plus fruit</li>
+      <li><b>After training:</b> a pint of milk, a yoghurt, or a sandwich. Milk is cheap and does the job</li>
+      <li><b>Dinner:</b> whatever's cooked at home, second helping if you're still hungry</li>
+      <li><b>Hungry between meals:</b> eat. Hunger at your age is information, not weakness</li>
+    </ul>
+  </div>
+
+  <div class="block warn">
+    <h4>Supplements: you need none of it</h4>
+    <p>Protein powder is expensive food in a tub — milk and eggs do the same job. Pre-workout, fat burners and anything sold as a "test booster" are not for teenagers and some are genuinely risky. If you're seriously considering a supplement, that's a conversation with a parent and a GP, not with an ad. Worth knowing that supplements are lightly regulated compared with medicines, so the label isn't a guarantee of what's in the tub.</p>
+  </div>
+
+  <div class="block stop">
+    <h4>Two things that will wreck this</h4>
+    <ul>
+      <li><b>Cutting food to "get lean first".</b> You can't build much while under-eating. Eat properly, train, be patient.</li>
+      <li><b>Rules that get stricter over time.</b> If food starts feeling like rules you can break, or you're anxious about eating out, skipping meals, or thinking about food most of the day — tell a parent or your GP. Common thing to run into, and very fixable early.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================ REAL ================ -->
+<section id="real" hidden>
+  <h2><small>The bit nobody posts</small>Straight talk</h2>
+  <p class="lede">Some of this is well established, some you should check with a GP or a coach who can actually see you. I've flagged which is which.</p>
+
+  <div class="block">
+    <h4>You'll get strong before you get big</h4>
+    <p>Early on, most of your improvement comes from your nervous system getting better at the movement rather than muscle actually growing. That's the mainstream position in strength and conditioning. It means your first months look like "I can do way more reps" rather than "I look different". Normal, and not wasted.</p>
+  </div>
+
+  <div class="block">
+    <h4>Puberty runs the size clock, not you</h4>
+    <p>How much visible muscle you can build, and when, is largely driven by where you are in puberty — and that varies enormously between people the same age. Someone in your year who's twice your size may just be eighteen months ahead. You can't train past that and you don't need to.</p>
+  </div>
+
+  <div class="block">
+    <h4>Lifting doesn't stunt your growth</h4>
+    <p>That's the myth this whole area is built on. Properly coached resistance training is generally considered safe for young people — major sports-medicine and strength bodies have published position statements saying so, though look up current NHS or NSCA wording rather than taking this summary as gospel. The real injury risk is bad technique, ego-loading, and copying adults online.</p>
+  </div>
+
+  <div class="block">
+    <h4>What you're comparing yourself to isn't real</h4>
+    <p>The physiques you see online are mostly grown men, years further into puberty, deliberately lit, often dehydrated for the shot, and sometimes taking drugs they don't mention. Your Tuesday against their highlight reel is a rigged game.</p>
+  </div>
+
+  <figure class="own">
+    <img src="progress.jpg" alt="[REPLACE: describe what the photo shows]"
+         onerror="this.style.display='none'">
+    <figcaption>
+      <b>[REPLACE: heading — e.g. "This took eleven years"]</b>
+      [REPLACE: your own account. What age you started, what the first two years actually
+      looked like, how much of the change was puberty rather than training, what you got
+      wrong. Written as evidence of how long it takes, not as a target to hit.]
+      <ul class="facts">
+        <li><b>Started at:</b> [age]</li>
+        <li><b>Photo taken:</b> [years later]</li>
+        <li><b>Trained:</b> [sessions per week]</li>
+        <li><b>Enhanced:</b> [your answer]</li>
+      </ul>
+    </figcaption>
+  </figure>
+
+  <div class="block stop">
+    <h4>Stop and tell an adult if…</h4>
+    <ul>
+      <li>You get pain in a joint — knee, shoulder, elbow, lower back — rather than muscle ache</li>
+      <li>Soreness lasts more than about three days, or you feel dizzy or sick during a session</li>
+      <li>Missing a session makes you anxious, or you'd train through illness or injury to avoid missing one</li>
+      <li>You're eating less to change how you look</li>
+    </ul>
+    <p style="margin-top:8px">Before you start: run this past a parent or carer, and check with your GP first if you have any health condition or you're coming back from an injury.</p>
+  </div>
+</section>
+
+<div id="authbox" hidden>
+  <div class="auth-card">
+    <h3 id="auth-title">Sign in</h3>
+    <p id="auth-sub">Signing in syncs your rungs, records and tests across your phone and laptop.</p>
+    <input id="auth-email" type="email" autocomplete="email" placeholder="Email" aria-label="Email">
+    <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Password (8+ characters)" aria-label="Password">
+    <button class="go" id="auth-go">Sign in</button>
+    <button class="alt" id="auth-swap">No account? Create one</button>
+    <button class="alt" id="auth-cancel">Cancel</button>
+    <p class="auth-msg" id="auth-msg"></p>
+    <p class="tiny">We store your email and your training progress. Nothing else. You can delete your account and everything in it at any time from this screen once signed in.</p>
+    <button class="alt" id="auth-delete" hidden style="color:var(--magenta)">Delete my account and all my data</button>
+  </div>
+</div>
+
+<div id="amrap" hidden>
+  <button class="am-close" id="am-close">Close</button>
+
+  <div class="am-setup" id="am-setup">
+    <h3>Timed test</h3>
+    <p>Max reps against the clock. This is a test, not a training session — use it for your four-week benchmarks, not instead of your normal sets.</p>
+
+    <div class="am-label">Exercise</div>
+    <div class="am-pick" id="am-ex"></div>
+
+    <div class="am-label">Time</div>
+    <div class="am-pick" id="am-time"></div>
+
+    <button class="am-go" id="am-start">Start</button>
+
+    <div class="am-note">
+      Only bodyweight moves here on purpose. Racing the clock wrecks form, and on bench, pull-ups
+      or loaded split squats that's how people get hurt. Reps still only count if they're full range —
+      half reps aren't a better score, they're a worse test.
+    </div>
+  </div>
+
+  <div class="am-live" id="am-live" hidden>
+    <div class="am-ready" id="am-ready" hidden>3</div>
+    <div id="am-running" hidden>
+      <div class="am-count" id="am-count">0</div>
+      <div class="am-clock" id="am-clock">0:60</div>
+      <div class="am-bar"><i id="am-fill"></i></div>
+      <div class="am-hint">Tap anywhere to count a rep</div>
+    </div>
+    <div id="am-result" hidden>
+      <div class="am-count" id="am-final">0</div>
+      <div class="am-hint" id="am-resultline">reps</div>
+      <button class="am-go" id="am-save" style="max-width:300px">Save to my record</button>
+      <div class="am-hint" id="am-saved" hidden style="color:var(--cyan)">Saved</div>
+    </div>
+  </div>
+</div>
+
+<div class="game" id="game" hidden>
+  <div class="game-tabs">
+    <button data-g="react" class="on">Reaction</button>
+    <button data-g="quiz">Quiz</button>
+  </div>
+  <div id="g-react">
+    <div id="react-pad">Tap to start.<br>Then tap the moment it lights up.</div>
+    <div class="react-best" id="react-best">Best: —</div>
+  </div>
+  <div id="g-quiz" hidden>
+    <p class="quiz-q" id="quiz-q"></p>
+    <div class="quiz-opts" id="quiz-opts"></div>
+    <p class="quiz-fb" id="quiz-fb"></p>
+  </div>
+</div>
+
+<div class="timer" id="timer">
+  <button data-t="45">45s</button>
+  <button data-t="90">90s</button>
+  <button data-t="120">2m</button>
+  <span id="tdisp" title="Tap to cancel">–:–</span>
+</div>
+
+<footer>
+  RUNG · a starting framework, not personalised medical or coaching advice.<br>
+  Check anything here with a parent, a qualified coach or your GP before acting on it.
+</footer>
+</div>
+
+<script>
+const PLAN = {
+  upper:[
+    {
+      id:"bench", name:"Bench press", what:"Chest · shoulders · triceps", reps:"Leave one in the tank — see rule 03",
+      rungs:[
+        "Press-up, hands on a worktop",
+        "Full press-up on the floor",
+        "Dumbbell floor press",
+        "Dumbbell bench press",
+        "Empty or light barbell — spotter present",
+        "Barbell bench, adding weight slowly"
+      ],
+      cues:[
+        "Shoulder blades pulled back and down into the bench, chest up",
+        "Lower to the middle of your chest, elbows about 45° from your body",
+        "Touch lightly — no bouncing the bar off your ribs",
+        "Feet flat on the floor, don't arch your back off the bench"
+      ]
+    },
+    {
+      id:"pullup", name:"Pull-up", what:"Back · biceps", reps:"Until you can't do another clean rep",
+      rungs:[
+        "Dead hang, 20 seconds",
+        "Inverted row under a low bar or table",
+        "Band-assisted pull-up",
+        "Negatives — jump up, lower for 5 seconds",
+        "Full pull-up",
+        "Full pull-up, pause at the top"
+      ],
+      cues:[
+        "Full hang at the bottom every rep — arms straight, no half reps",
+        "Pull your elbows down towards your ribs, chin over the bar",
+        "Don't kick or swing; if you need momentum, drop a rung",
+        "Lower under control — the way down is half the exercise"
+      ]
+    },
+    {
+      id:"lateral", name:"Lateral raise", what:"Side delts · shoulder width", reps:"Until you can't do another clean rep",
+      rungs:[
+        "No weight — arms only, 20 strict reps",
+        "Water bottles or 2kg dumbbells",
+        "3–4kg, 3 seconds down every rep",
+        "3–4kg, pause one second at the top",
+        "5–6kg for 12 reps, strict",
+        "Heavier for 10, then drop to light for 15"
+      ],
+      cues:[
+        "Lift out to the side, not forwards — stop level with your shoulders",
+        "Lead with your elbows, little finger slightly higher than thumb",
+        "No swinging or bouncing off your hips — if you're swinging, it's too heavy",
+        "This is a small muscle. Light weight is not a failure here, it's correct"
+      ]
+    }
+  ],
+  core:[
+    {
+      id:"legraise", name:"Leg raise", what:"Lower abs · hip flexors", reps:"Until you can't do another clean rep",
+      rungs:[
+        "Dead bug — opposite arm and leg, slow",
+        "Lying bent-knee raise",
+        "Lying straight-leg raise",
+        "Straight-leg raise, hips lifted at the top",
+        "Hanging knee raise",
+        "Hanging straight-leg raise"
+      ],
+      cues:[
+        "Press your lower back into the floor and keep it there",
+        "If your back arches off the floor, bend your knees more or drop a rung",
+        "Lower slowly — heels stop just short of the floor, don't rest them",
+        "Hanging versions: no swinging, control the way down"
+      ]
+    },
+    {
+      id:"crunch", name:"Crunch", what:"Upper abs", reps:"Until you can't do another clean rep",
+      rungs:[
+        "Standard crunch, arms across chest",
+        "Crunch with a 3 second lower",
+        "Crunch with a 2 second hold at the top",
+        "Feet up on a chair or sofa",
+        "Holding a light weight at your chest",
+        "Weighted crunch, feet elevated"
+      ],
+      cues:[
+        "Curl your ribs towards your hips — it's a short movement, not a sit-up",
+        "Hands beside your ears, never pulling on your neck",
+        "Chin off your chest, eyes on the ceiling",
+        "Breathe out as you crunch up"
+      ]
+    }
+  ],
+  legs:[
+    {
+      id:"bulgarian", name:"Bulgarian split squat", what:"Quads · glutes · balance", reps:"Until form or balance goes",
+      rungs:[
+        "Split squat, both feet on the floor",
+        "Rear foot on a low step",
+        "Rear foot on a bench or chair, bodyweight",
+        "Rear foot elevated, 3 seconds down",
+        "Holding dumbbells or a loaded backpack",
+        "Heavier dumbbells for 8 per leg"
+      ],
+      cues:[
+        "Front foot far enough forward that your shin stays near vertical at the bottom",
+        "Drop straight down, back knee towards the floor — don't lunge forwards",
+        "Weight through the middle of your front foot, heel down",
+        "Hold a wall or chair for balance while you're learning. That's not cheating"
+      ]
+    },
+    {
+      id:"calf", name:"Single-leg calf raise", what:"Calves", reps:"Until you can't do another clean rep",
+      rungs:[
+        "Two-leg calf raise on flat floor",
+        "Two-leg calf raise on a step, full stretch at the bottom",
+        "Single-leg calf raise on flat floor",
+        "Single-leg on a step, full range",
+        "Single-leg on a step, 3 seconds down, 1 second squeeze at top",
+        "Single-leg on a step holding a dumbbell"
+      ],
+      cues:[
+        "All the way up onto your big toe, all the way down into the stretch",
+        "Fingertips on a wall for balance only — don't push through your hands",
+        "Slow down. Calves respond to control, not bouncing",
+        "Keep your knee straight but not locked hard"
+      ]
+    }
+  ]
+};
+
+const DAYS=[
+  {d:"Mon",k:"train",n:"Upper"},
+  {d:"Tue",k:"",n:"Move, don't train"},
+  {d:"Wed",k:"train",n:"Core"},
+  {d:"Thu",k:"",n:"Move, don't train"},
+  {d:"Fri",k:"train",n:"Legs"},
+  {d:"Sat",k:"",n:"Sport, walking, life"},
+  {d:"Sun",k:"",n:"Sleep in. Eat well"}
+];
+
+let state = { levels:{}, sessions:{upper:0,core:0,legs:0}, tests:[], name:"", dates:[], best:0 };
+
+/* Saves to whichever store is available: Claude's storage in preview,
+   the browser's own localStorage once the file is hosted on the web. */
+async function save(){
+  const data = JSON.stringify(state);
+  if(window.cloudSave) window.cloudSave(state);
+  try{
+    if(window.storage){ await window.storage.set("rung-v2", data); return; }
+  }catch(e){ /* fall through to localStorage */ }
+  try{ localStorage.setItem("rung-v2", data); }
+  catch(e){ /* private browsing or storage full — session-only is fine */ }
+}
+async function load(){
+  let raw = null;
+  try{
+    if(window.storage){
+      const r = await window.storage.get("rung-v2");
+      if(r && r.value) raw = r.value;
+    }
+  }catch(e){ /* nothing saved there */ }
+  if(raw === null){
+    try{ raw = localStorage.getItem("rung-v2"); }catch(e){ raw = null; }
+  }
+  if(raw){
+    try{
+      const p = JSON.parse(raw);
+      state.levels = p.levels || {};
+      state.sessions = Object.assign(state.sessions, p.sessions || {});
+      state.tests = Array.isArray(p.tests) ? p.tests : [];
+      state.name = typeof p.name === "string" ? p.name : "";
+      state.dates = Array.isArray(p.dates) ? p.dates : [];
+      state.best = typeof p.best === "number" ? p.best : 0;
+    }catch(e){ /* corrupted save — start fresh */ }
+  }
+  render();
+}
+const lvOf = id => state.levels[id] || 0;
+
+function renderDay(key){
+  const host = document.getElementById("lifts-"+key);
+  host.innerHTML = "";
+  PLAN[key].forEach((lift,i)=>{
+    const lv = lvOf(lift.id);
+    const el = document.createElement("div");
+    el.className = "lift";
+    el.innerHTML = `
+      <div class="lift-head">
+        <span class="n">0${i+1}</span>
+        <h3>${lift.name}</h3>
+        <span class="what">${lift.what}</span>
+      </div>
+      <div class="reps">3 sets · ${lift.reps}</div>
+      <div class="lift-body">
+        <div>
+          <ul class="ladder">
+            ${lift.rungs.map((r,j)=>`
+              <li class="rung ${j<lv?'done':''} ${j===lv?'now':''}">
+                <span class="lv">${j+1}</span><span>${r}</span>
+              </li>`).join("")}
+          </ul>
+          <div class="ctrl">
+            <button class="mini" data-up="${lift.id}" ${lv>=lift.rungs.length-1?'disabled':''}>Level up</button>
+            <button class="mini" data-down="${lift.id}" ${lv<=0?'disabled':''}>Drop back</button>
+          </div>
+        </div>
+        <div><ul class="cues">${lift.cues.map(c=>`<li>${c}</li>`).join("")}</ul></div>
+      </div>`;
+    host.appendChild(el);
+  });
+  host.querySelectorAll("[data-up]").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.up, max=findLift(id).rungs.length-1;
+    if(lvOf(id)<max){ state.levels[id]=lvOf(id)+1; save(); render(); }
+  });
+  host.querySelectorAll("[data-down]").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.down;
+    if(lvOf(id)>0){ state.levels[id]=lvOf(id)-1; save(); render(); }
+  });
+}
+function findLift(id){
+  return Object.values(PLAN).flat().find(l=>l.id===id);
+}
+
+function render(){
+  const all = Object.values(PLAN).flat();
+  const total = Object.values(state.sessions).reduce((a,b)=>a+b,0);
+  document.getElementById("s-sessions").textContent = total;
+  document.getElementById("s-week").textContent = Math.floor(total/3)+1;
+  const climbed = all.reduce((a,l)=>a+lvOf(l.id),0);
+  const maxRungs = all.reduce((a,l)=>a+l.rungs.length-1,0);
+  document.getElementById("s-rungs").textContent = climbed + "/" + maxRungs;
+  renderRecord();
+  renderName();
+  renderCoach();
+  renderTests();
+  ["upper","core","legs"].forEach(renderDay);
+  document.getElementById("weekgrid").innerHTML =
+    DAYS.map(d=>`<div class="day ${d.k}"><b>${d.d}</b><span>${d.n}</span></div>`).join("");
+  document.querySelectorAll("[data-log]").forEach(b=>b.onclick=()=>{
+    state.sessions[b.dataset.log]++;
+    state.dates.push(new Date().toISOString().slice(0,10));
+    if(state.dates.length > 400) state.dates = state.dates.slice(-400);
+    save(); render();
+  });
+  document.querySelectorAll("[data-undo]").forEach(b=>b.onclick=()=>{
+    const k=b.dataset.undo;
+    if(state.sessions[k]>0){ state.sessions[k]--; state.dates.pop(); save(); render(); }
+  });
+}
+
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.onclick=()=>{
+    document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", t===tab));
+    ["upper","core","legs","rules","week","food","real"].forEach(id=>{
+      document.getElementById(id).hidden = (id !== tab.dataset.panel);
+    });
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+});
+
+
+/* ---------- your name (stored on this device only) ---------- */
+function renderName(){
+  const greet = document.getElementById("greet");
+  const input = document.getElementById("nameIn");
+  const setBtn = document.getElementById("nameSet");
+  const editBtn = document.getElementById("nameEdit");
+  if(!greet) return;
+  const has = !!state.name;
+  greet.hidden = !has;
+  input.hidden = has;
+  setBtn.hidden = has;
+  editBtn.hidden = !has;
+  if(has) greet.innerHTML = "Training log for <b>" + state.name + "</b>";
+}
+(function(){
+  const input = document.getElementById("nameIn");
+  const setBtn = document.getElementById("nameSet");
+  const editBtn = document.getElementById("nameEdit");
+  if(!setBtn) return;
+  setBtn.onclick = ()=>{
+    const v = input.value.trim().slice(0,20);
+    if(!v) return;
+    state.name = v; save(); renderName();
+  };
+  input.onkeydown = e => { if(e.key === "Enter") setBtn.click(); };
+  editBtn.onclick = ()=>{
+    input.value = state.name; state.name = ""; save(); renderName(); input.focus();
+  };
+})();
+
+/* ---------- coach view (#coach in the URL) ---------- */
+function renderCoach(){
+  const box = document.getElementById("coach");
+  if(!box) return;
+  const on = location.hash.toLowerCase() === "#coach";
+  box.hidden = !on;
+  if(!on) return;
+  const all = Object.values(PLAN).flat();
+  const t = state.sessions;
+  const rows = [
+    ["Name on this device", state.name || "not set"],
+    ["Total sessions", t.upper + t.core + t.legs],
+    ["Upper / Core / Legs", t.upper + " / " + t.core + " / " + t.legs],
+    ["Rungs climbed", all.reduce((a,l)=>a+lvOf(l.id),0) + " of " +
+                      all.reduce((a,l)=>a+l.rungs.length-1,0)],
+    ["Benchmark tests saved", state.tests.length],
+    ["Days with a session", new Set(state.dates).size],
+    ["First session", state.dates.length ? state.dates[0] : "none"],
+    ["Latest session", state.dates.length ? state.dates[state.dates.length-1] : "none"]
+  ];
+  document.getElementById("coach-rows").innerHTML =
+    rows.map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join("");
+}
+window.addEventListener("hashchange", renderCoach);
+(function(){
+  const ex = document.getElementById("c-export");
+  const rs = document.getElementById("c-reset");
+  if(!ex) return;
+  ex.onclick = ()=>{
+    const txt = JSON.stringify(state, null, 2);
+    try{
+      navigator.clipboard.writeText(txt);
+      ex.textContent = "Copied";
+    }catch(e){
+      ex.textContent = "Copy failed";
+      console.log(txt);
+    }
+    setTimeout(()=>{ ex.textContent = "Copy my data"; }, 2000);
+  };
+  rs.onclick = ()=>{
+    if(rs.dataset.armed !== "1"){
+      rs.dataset.armed = "1";
+      rs.textContent = "Tap again to wipe";
+      setTimeout(()=>{ rs.dataset.armed = "0"; rs.textContent = "Reset everything"; }, 4000);
+      return;
+    }
+    state = { levels:{}, sessions:{upper:0,core:0,legs:0}, tests:[], name:"", dates:[], best:0 };
+    rs.dataset.armed = "0"; rs.textContent = "Reset everything";
+    save(); render();
+  };
+})();
+
+/* ---------- your record ---------- */
+function renderRecord(){
+  const el = id => document.getElementById(id);
+  if(!el("r-total")) return;
+  const t = state.sessions;
+  el("r-total").textContent = t.upper + t.core + t.legs;
+  el("r-upper").textContent = t.upper;
+  el("r-core").textContent  = t.core;
+  el("r-legs").textContent  = t.legs;
+  const d = state.dates;
+  if(!d.length){ el("r-last").textContent = "No sessions logged yet."; return; }
+  const last = d[d.length-1];
+  const days = Math.round((Date.now() - new Date(last+"T12:00:00").getTime()) / 86400000);
+  const ago = days <= 0 ? "today" : (days === 1 ? "yesterday" : days + " days ago");
+  const weeks = new Set(d.map(x=>{
+    const dt = new Date(x+"T12:00:00");
+    const th = new Date(dt); th.setDate(dt.getDate() + 3 - ((dt.getDay()+6)%7));
+    return th.getFullYear() + "-" + th.getMonth() + "-" + Math.floor(th.getDate()/7);
+  })).size;
+  el("r-last").textContent = "Last session " + ago + ". You've trained in " + weeks +
+    (weeks === 1 ? " different week." : " different weeks.") +
+    (days >= 10 ? " Long gap — drop back a rung when you restart rather than picking up where you left off." : "");
+}
+
+/* ---------- benchmark tests ---------- */
+function renderTests(){
+  const log = document.getElementById("b-log");
+  const empty = document.getElementById("b-empty");
+  if(!log) return;
+  const t = state.tests;
+  empty.hidden = t.length > 0;
+  const first = t[0];
+  log.innerHTML = t.slice().reverse().map(e=>{
+    const delta = (k)=>{
+      if(!first || e===first) return "";
+      const d = e[k] - first[k];
+      return d > 0 ? ` <span class="up">+${d}</span>` : (d < 0 ? ` (${d})` : "");
+    };
+    return `<li>
+      <span class="dt">${e.date}</span>
+      <span>${e.p} press-ups${delta("p")}</span>
+      <span>${e.h}s hang${delta("h")}</span>
+      <span>${e.s} squats${delta("s")}</span>
+    </li>`;
+  }).join("");
+}
+const bSave = document.getElementById("b-save");
+if(bSave) bSave.onclick = ()=>{
+  const grab = id => Math.max(0, Math.min(999, parseInt(document.getElementById(id).value,10) || 0));
+  const entry = {
+    date: new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short"}),
+    p: grab("b1"), h: grab("b2"), s: grab("b3")
+  };
+  if(entry.p + entry.h + entry.s === 0) return;
+  state.tests.push(entry);
+  ["b1","b2","b3"].forEach(id=>document.getElementById(id).value="");
+  save(); renderTests();
+};
+
+
+
+/* ---------- timed test (AMRAP) ---------- */
+const AM_EX = [
+  {k:"press", label:"Press-ups", bench:"p"},
+  {k:"squat", label:"Squats",    bench:"s"},
+  {k:"crunch",label:"Crunches",  bench:null},
+  {k:"legraise",label:"Leg raises", bench:null},
+  {k:"calf",  label:"Calf raises", bench:null}
+];
+const AM_TIME = [30, 60, 120];
+
+(function(){
+  const root = document.getElementById("amrap");
+  if(!root) return;
+  const el = id => document.getElementById(id);
+  let ex = AM_EX[0], secs = 60, reps = 0, tick = null, endAt = 0;
+
+  function paintPicks(){
+    el("am-ex").innerHTML = AM_EX.map(e =>
+      `<button data-ex="${e.k}" class="${e.k===ex.k?'on':''}">${e.label}</button>`).join("");
+    el("am-time").innerHTML = AM_TIME.map(t =>
+      `<button data-tm="${t}" class="${t===secs?'on':''}">${t<60?t+"s":(t/60)+" min"}</button>`).join("");
+    el("am-ex").querySelectorAll("button").forEach(b => b.onclick = ()=>{
+      ex = AM_EX.find(e=>e.k===b.dataset.ex); paintPicks();
+    });
+    el("am-time").querySelectorAll("button").forEach(b => b.onclick = ()=>{
+      secs = +b.dataset.tm; paintPicks();
+    });
+  }
+
+  function open(){ root.hidden = false; el("am-setup").hidden = false; el("am-live").hidden = true; paintPicks(); }
+  function close(){
+    clearInterval(tick); tick = null; root.hidden = true;
+    el("am-running").hidden = true; el("am-result").hidden = true; el("am-ready").hidden = true;
+  }
+  el("am-open").onclick = open;
+  el("am-close").onclick = close;
+
+  el("am-start").onclick = ()=>{
+    el("am-setup").hidden = true;
+    el("am-live").hidden = false;
+    el("am-result").hidden = true;
+    el("am-running").hidden = true;
+    el("am-ready").hidden = false;
+    let n = 3;
+    el("am-ready").textContent = n;
+    const cd = setInterval(()=>{
+      n--;
+      if(n > 0){ el("am-ready").textContent = n; }
+      else { clearInterval(cd); el("am-ready").hidden = true; run(); }
+    }, 800);
+  };
+
+  function run(){
+    reps = 0; endAt = Date.now() + secs*1000;
+    el("am-count").textContent = "0";
+    el("am-running").hidden = false;
+    tick = setInterval(()=>{
+      const left = Math.max(0, endAt - Date.now());
+      const sl = Math.ceil(left/1000);
+      el("am-clock").textContent = Math.floor(sl/60) + ":" + String(sl%60).padStart(2,"0");
+      el("am-clock").classList.toggle("low", sl <= 10);
+      el("am-fill").style.width = (left / (secs*1000) * 100) + "%";
+      if(left <= 0) finish();
+    }, 100);
+  }
+
+  el("am-live").onclick = e => {
+    if(el("am-running").hidden) return;
+    if(e.target.tagName === "BUTTON") return;
+    reps++;
+    el("am-count").textContent = reps;
+  };
+
+  function finish(){
+    clearInterval(tick); tick = null;
+    el("am-running").hidden = true;
+    el("am-result").hidden = false;
+    el("am-saved").hidden = true;
+    el("am-save").hidden = !ex.bench;
+    el("am-final").textContent = reps;
+    el("am-resultline").textContent = reps + " " + ex.label.toLowerCase() + " in " +
+      (secs < 60 ? secs + " seconds" : (secs/60) + " minute" + (secs>60?"s":""));
+    const pbKey = "pb_" + ex.k + "_" + secs;
+    const old = state[pbKey] || 0;
+    if(reps > old){
+      state[pbKey] = reps;
+      el("am-resultline").textContent += " — new best";
+      save();
+    } else if(old){
+      el("am-resultline").textContent += " (best: " + old + ")";
+    }
+  }
+
+  el("am-save").onclick = ()=>{
+    const last = state.tests[state.tests.length-1];
+    const today = new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short"});
+    if(last && last.date === today){
+      last[ex.bench] = Math.max(last[ex.bench] || 0, reps);
+    } else {
+      state.tests.push({date: today, p:0, h:0, s:0, [ex.bench]: reps});
+    }
+    save(); renderTests();
+    el("am-saved").hidden = false;
+    el("am-save").hidden = true;
+  };
+})();
+
+/* ---------- rest-period games ---------- */
+const QUIZ = [
+  ["Your set should end when…", ["You hit a set number of reps","Your form gives out","You feel like stopping"], 1,
+   "Form, not willpower and not a number. The last rep should look like the ones before it."],
+  ["Which lift do you never take to failure?", ["Lateral raise","Barbell bench press","Crunch"], 1,
+   "A bar you can't press comes down on your throat. End every bench set with one still in you."],
+  ["Your knees cave inwards on a squat. What now?", ["Push on through","Add weight","Drop back a rung"], 2,
+   "Form breaking is the signal to drop back. A rung you own builds more than a rung you survive."],
+  ["Do crunches burn belly fat?", ["Yes, that's the point","No — you can't spot reduce","Only if you do 200"], 1,
+   "They build the muscle underneath. Whether you see it is mostly puberty and genetics at your age."],
+  ["Best thing you can do for your results outside training?", ["Protein powder","Sleep","More sessions"], 1,
+   "Sleep beats every training tweak and every supplement, and it's free."],
+  ["You've had 10 days off. Restart by…", ["Picking up where you left off","Doing double","Dropping back a rung"], 2,
+   "Come back a rung lower. You'll be back where you were within a fortnight."],
+  ["How much of a lift's benefit is in the lowering half?", ["Almost none","Roughly half","All of it"], 1,
+   "The way down builds at least as much as the way up, and it's the half people throw away."],
+  ["Rest between sets of bench or pull-ups?", ["20 seconds","45 seconds","90–120 seconds"], 2,
+   "Rest short and you do fewer reps, which means less work done. Sit down and wait."],
+  ["You feel sharp pain in your shoulder joint mid-set.", ["Push through it","Stop and tell an adult","Switch arms"], 1,
+   "Joint pain isn't muscle burn. Stop, and tell someone."],
+  ["Do you need protein powder to build muscle at 14?", ["Yes","No — milk and eggs do the job","Only on training days"], 1,
+   "It's expensive food in a tub. Nothing in it that ordinary food doesn't have."],
+  ["Should you 'cut' to get lean before building muscle?", ["Yes, get lean first","No — under-eating stops you building","Only in summer"], 1,
+   "You can't build much while under-eating. Eat properly, train, be patient."],
+  ["Someone in your year is twice your size. Most likely reason?", ["They train harder","They're further through puberty","You're doing it wrong"], 1,
+   "Puberty runs the size clock. Timing varies hugely between people the same age."]
+];
+
+(function(){
+  const panel = document.getElementById("game");
+  if(!panel) return;
+  const pad = document.getElementById("react-pad");
+  const bestEl = document.getElementById("react-best");
+  let waitT = null, goAt = 0, phase = "idle";
+
+  function showBest(){ bestEl.textContent = state.best ? "Best: " + state.best + "ms" : "Best: \u2014"; }
+  function resetPad(msg){
+    clearTimeout(waitT); phase = "idle"; pad.className = "";
+    pad.innerHTML = msg || "Tap to start.<br>Then tap the moment it lights up.";
+  }
+  pad.onclick = ()=>{
+    if(phase === "idle"){
+      phase = "waiting"; pad.className = "wait"; pad.textContent = "Wait for it\u2026";
+      waitT = setTimeout(()=>{
+        phase = "go"; goAt = Date.now(); pad.className = "go"; pad.textContent = "TAP";
+      }, 1200 + Math.random()*3000);
+    } else if(phase === "waiting"){
+      resetPad("Too early.<br>Tap to try again.");
+    } else if(phase === "go"){
+      const ms = Date.now() - goAt;
+      if(!state.best || ms < state.best){ state.best = ms; save(); }
+      showBest();
+      resetPad(ms + "ms<br>Tap to go again.");
+    }
+  };
+  showBest();
+
+  let qi = Math.floor(Math.random()*QUIZ.length);
+  function askQuiz(){
+    const q = QUIZ[qi];
+    document.getElementById("quiz-q").textContent = q[0];
+    document.getElementById("quiz-fb").textContent = "";
+    const box = document.getElementById("quiz-opts");
+    box.innerHTML = "";
+    q[1].forEach((opt,i)=>{
+      const b = document.createElement("button");
+      b.textContent = opt;
+      b.onclick = ()=>{
+        b.className = i === q[2] ? "right" : "wrong";
+        if(i !== q[2]) box.children[q[2]].className = "right";
+        document.getElementById("quiz-fb").textContent = q[3];
+        [...box.children].forEach(c=>c.onclick = null);
+        setTimeout(()=>{ qi = (qi+1) % QUIZ.length; askQuiz(); }, 2600);
+      };
+      box.appendChild(b);
+    });
+  }
+  askQuiz();
+
+  document.querySelectorAll(".game-tabs button").forEach(b=>{
+    b.onclick = ()=>{
+      document.querySelectorAll(".game-tabs button").forEach(x=>x.classList.toggle("on", x===b));
+      document.getElementById("g-react").hidden = b.dataset.g !== "react";
+      document.getElementById("g-quiz").hidden  = b.dataset.g !== "quiz";
+    };
+  });
+
+  window.showGame = on => {
+    panel.hidden = !on;
+    if(!on) resetPad();
+  };
+})();
+
+/* ---------- rest timer ---------- */
+(function(){
+  const disp = document.getElementById("tdisp");
+  let end = 0, tick = null;
+  const fmt = ms => {
+    const s = Math.max(0, Math.ceil(ms/1000));
+    return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0");
+  };
+  function stop(){
+    clearInterval(tick); tick=null; disp.textContent="–:–"; disp.className="";
+    if(window.showGame) window.showGame(false);
+  }
+  function beep(){
+    try{
+      const C = window.AudioContext || window.webkitAudioContext;
+      if(!C) return;
+      const ctx = new C(), o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.value = 660; g.gain.value = 0.05;
+      o.connect(g); g.connect(ctx.destination); o.start();
+      setTimeout(()=>{ o.stop(); ctx.close(); }, 180);
+    }catch(e){ /* audio blocked — visual cue still fires */ }
+  }
+  document.querySelectorAll(".timer button").forEach(b=>{
+    b.onclick = ()=>{
+      end = Date.now() + (+b.dataset.t * 1000);
+      disp.className = "live";
+      if(window.showGame) window.showGame(true);
+      clearInterval(tick);
+      tick = setInterval(()=>{
+        const left = end - Date.now();
+        disp.textContent = fmt(left);
+        if(left <= 0){
+          clearInterval(tick); tick=null;
+          disp.textContent = "GO";
+          disp.className = "done";
+          beep();
+          if(window.showGame) window.showGame(false);
+          setTimeout(()=>{ if(!tick) stop(); }, 4000);
+        }
+      }, 200);
+      disp.textContent = fmt(end - Date.now());
+    };
+  });
+  disp.onclick = stop;
+})();
+
+
+window.getLocalState = () => state;
+window.applyCloudState = (d) => {
+  if(d.levels)   state.levels = d.levels;
+  if(d.sessions) state.sessions = Object.assign(state.sessions, d.sessions);
+  if(Array.isArray(d.tests)) state.tests = d.tests;
+  if(Array.isArray(d.dates)) state.dates = d.dates;
+  if(typeof d.name === "string") state.name = d.name;
+  render();
+};
+
+load();
+</script>
+
+<script type="module">
+/* ============================================================
+   FIREBASE SIGN-IN  —  fill in the config below to switch on.
+   Until you do, the app works exactly as before: local only.
+   Setup instructions are in FIREBASE-SETUP.md
+   ============================================================ */
+
+const firebaseConfig = {
+  apiKey:            "PASTE_HERE",
+  authDomain:        "PASTE_HERE",
+  projectId:         "PASTE_HERE",
+  storageBucket:     "PASTE_HERE",
+  messagingSenderId: "PASTE_HERE",
+  appId:             "PASTE_HERE"
+};
+
+const ADMIN_EMAIL = "PASTE_YOUR_ADMIN_EMAIL_HERE";
+
+const configured = !Object.values(firebaseConfig).some(v => v === "PASTE_HERE");
+const $ = id => document.getElementById(id);
+
+if(!configured){
+  $("authwho").textContent = "Progress saves on this device only";
+  $("authbtn").hidden = true;
+} else {
+  const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+  const {
+    getAuth, onAuthStateChanged, signInWithEmailAndPassword,
+    createUserWithEmailAndPassword, signOut, deleteUser
+  } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+  const {
+    getFirestore, doc, getDoc, setDoc, deleteDoc, collection, getDocs
+  } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+  let user = null, saveTimer = null;
+
+  /* ---- push local state up, at most once every 2 seconds ---- */
+  window.cloudSave = (state) => {
+    if(!user) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(async ()=>{
+      try{
+        await setDoc(doc(db, "users", user.uid), {
+          email: user.email,
+          updated: new Date().toISOString(),
+          sessions: state.sessions,
+          levels: state.levels,
+          tests: state.tests,
+          dates: state.dates,
+          name: state.name || ""
+        });
+        $("authsync").textContent = "synced";
+        setTimeout(()=>{ $("authsync").textContent = ""; }, 1800);
+      }catch(e){
+        $("authsync").textContent = "sync failed";
+        console.warn("cloud save failed:", e.message);
+      }
+    }, 2000);
+  };
+
+  /* ---- pull cloud state down on sign-in ---- */
+  async function pull(){
+    try{
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if(snap.exists()){
+        const d = snap.data();
+        if(window.applyCloudState) window.applyCloudState(d);
+      } else {
+        window.cloudSave(window.getLocalState ? window.getLocalState() : {});
+      }
+    }catch(e){ console.warn("cloud load failed:", e.message); }
+  }
+
+  /* ---- admin ---- */
+  async function loadAdmin(){
+    const panel = $("adminPanel");
+    if(!user || user.email !== ADMIN_EMAIL){ panel.hidden = true; return; }
+    panel.hidden = false;
+    try{
+      const snap = await getDocs(collection(db, "users"));
+      let total = 0, sess = 0, tests = 0, active = 0;
+      const weekAgo = Date.now() - 7*86400000;
+      snap.forEach(d => {
+        const u = d.data(); total++;
+        const s = u.sessions || {};
+        sess += (s.upper||0) + (s.core||0) + (s.legs||0);
+        tests += (u.tests || []).length;
+        if(u.updated && new Date(u.updated).getTime() > weekAgo) active++;
+      });
+      $("admin-rows").innerHTML = [
+        ["Registered users", total],
+        ["Active in last 7 days", active],
+        ["Sessions logged (all users)", sess],
+        ["Benchmark tests saved", tests],
+        ["Average sessions per user", total ? (sess/total).toFixed(1) : 0]
+      ].map(r => `<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join("");
+    }catch(e){
+      $("admin-rows").innerHTML = `<div><span>Couldn't load</span><b>${e.code || "error"}</b></div>`;
+    }
+  }
+
+  /* ---- UI ---- */
+  let mode = "in";
+  const msg = t => { $("auth-msg").textContent = t; };
+  function setMode(m){
+    mode = m;
+    $("auth-title").textContent = m === "in" ? "Sign in" : "Create account";
+    $("auth-go").textContent    = m === "in" ? "Sign in" : "Create account";
+    $("auth-swap").textContent  = m === "in" ? "No account? Create one" : "Already have an account? Sign in";
+    $("auth-pass").autocomplete = m === "in" ? "current-password" : "new-password";
+    msg("");
+  }
+  $("authbtn").onclick   = ()=>{ $("authbox").hidden = false; setMode("in"); };
+  $("auth-cancel").onclick = ()=>{ $("authbox").hidden = true; };
+  $("auth-swap").onclick = ()=> setMode(mode === "in" ? "up" : "in");
+  $("authout").onclick   = ()=> signOut(auth);
+
+  $("auth-go").onclick = async ()=>{
+    const email = $("auth-email").value.trim();
+    const pass  = $("auth-pass").value;
+    if(!email || pass.length < 8){ return msg("Email, and a password of at least 8 characters."); }
+    msg("Working…");
+    try{
+      if(mode === "in") await signInWithEmailAndPassword(auth, email, pass);
+      else              await createUserWithEmailAndPassword(auth, email, pass);
+      $("authbox").hidden = true;
+      $("auth-pass").value = "";
+    }catch(e){
+      const m = {
+        "auth/invalid-credential": "Wrong email or password.",
+        "auth/email-already-in-use": "That email already has an account — sign in instead.",
+        "auth/weak-password": "Password too weak. Use 8+ characters.",
+        "auth/invalid-email": "That doesn't look like an email address.",
+        "auth/too-many-requests": "Too many tries. Wait a few minutes."
+      }[e.code];
+      msg(m || ("Error: " + e.code));
+    }
+  };
+
+  $("auth-delete").onclick = async ()=>{
+    if($("auth-delete").dataset.armed !== "1"){
+      $("auth-delete").dataset.armed = "1";
+      $("auth-delete").textContent = "Tap again — this cannot be undone";
+      setTimeout(()=>{
+        $("auth-delete").dataset.armed = "0";
+        $("auth-delete").textContent = "Delete my account and all my data";
+      }, 5000);
+      return;
+    }
+    try{
+      await deleteDoc(doc(db, "users", user.uid));
+      await deleteUser(user);
+      $("authbox").hidden = true;
+    }catch(e){ msg("Sign out and back in first, then delete. (" + e.code + ")"); }
+  };
+
+  onAuthStateChanged(auth, async u => {
+    user = u;
+    $("authbtn").hidden    = !!u;
+    $("authout").hidden    = !u;
+    $("auth-delete").hidden = !u;
+    if(u){
+      $("authwho").innerHTML = "Signed in as <b>" + u.email + "</b>";
+      await pull();
+      await loadAdmin();
+    } else {
+      $("authwho").textContent = "Not signed in — progress saves on this device only";
+      $("adminPanel").hidden = true;
+    }
+  });
+}
+</script>
+</body>
+</html>
